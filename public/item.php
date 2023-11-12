@@ -25,7 +25,7 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
             <div class="row">
 
                 <div class="col-md-7">
-                    <img class="img-responsive" src="https://picsum.photos/seed/picsum/700/600" alt="">
+                    <img class="img-responsive" src="<?php echo $row['product_image'] ?>" alt="">
 
                 </div>
 

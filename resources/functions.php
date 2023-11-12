@@ -1,7 +1,7 @@
 <?php
 
 
-//Hlper functions
+//Helper functions
 
 function setMessage($msg)
 {
@@ -68,7 +68,7 @@ function getProducts()
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php">Add to cart</a>
+                <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add to cart</a>
             </div>
             </div>
         </div>    

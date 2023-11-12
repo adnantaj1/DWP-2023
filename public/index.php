@@ -26,6 +26,7 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
             </div>
 
             <div class="row">
+
                 <?php getProducts(); ?>
 
             </div> <!-- row ends here -->
