@@ -68,7 +68,7 @@ function getProducts()
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add to cart</a>
+                <a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['product_id']}">Add to cart</a>
             </div>
             </div>
         </div>    
@@ -155,7 +155,8 @@ function login_user()
             setMessage("Wrong Username of Password");
             redirect("login.php");
         } else {
-            setMessage("Welcome to admin {$username}");
+            $_SESSION['username'] = $username;
+            // setMessage("Welcome to admin {$username}");
             redirect("admin");
         }
     }

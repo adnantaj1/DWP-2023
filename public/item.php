@@ -54,7 +54,7 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
 
                             <form action="">
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary" value="ADD TO CART">
+                                    <a href="../resources/cart.php?add=<?php echo $row['product_id']; ?>" class="btn btn-primary">ADD TO CART</a>
                                 </div>
                             </form>
 

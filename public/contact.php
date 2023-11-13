@@ -4,7 +4,7 @@
 
 
 <!-- Header-->
-<?php include(TEMPLATE_FRONT .  "/header.php"); ?>
+<?php require_once(TEMPLATE_FRONT . DS . "header.php"); ?>
 
 <!-- Contact Section -->
 

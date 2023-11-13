@@ -1,7 +1,5 @@
 <?php
 require_once("../resources/config.php");
-require_once("cart.php");
-
 require_once(TEMPLATE_FRONT . DS . "header.php");
 ?>
 <!-- Page Content -->
