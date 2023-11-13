@@ -2,7 +2,6 @@
 
 <?php require_once("../resources/config.php"); ?>
 
-
 <!-- Header-->
 <?php require_once(TEMPLATE_FRONT . DS . "header.php"); ?>
 
