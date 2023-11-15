@@ -1,6 +1,6 @@
 <?php
 require_once("config.php");
-require_once(TEMPLATE_FRONT . DS . "header.php");
+//require_once(TEMPLATE_FRONT . DS . "header.php");
 
 
 if (isset($_GET['add'])) {
@@ -100,5 +100,54 @@ function show_paypal()
         alt="PayPal - The safer, easier way to pay online">
         DELIMETER;
         return $paypal_button;
+    }
+}
+
+function process_transactions()
+{
+    if (isset($_GET['tx'])) {
+        $amount = $_GET['amt'];
+        $currency = $_GET['cc'];
+        $transaction = $_GET['tx'];
+        $status = $_GET['st'];
+
+        $total = 0;
+        $item_quantity = 0;
+        foreach ($_SESSION as $name => $value) {
+            if ($value > 0) {
+                if (substr($name, 0, 8) == "product_") {
+                    $length = strlen($name) - 8;
+                    $id = substr($name, 8, $length);
+                    // insert data into orders table
+                    $send_order = query("INSERT INTO orders (order_amount, order_transaction, order_status, order_currency) 
+                        VALUES ('{$amount}', '{$transaction}', '{$status}', '{$currency}')");
+
+                    $last_id = last_id();
+                    confirm($send_order);
+
+                    //get data from products table
+                    $query = query("SELECT * FROM products 
+                        WHERE product_id=" . escape_string($id) . " ");
+                    confirm($query);
+                    while ($row = fetch_array($query)) {
+                        $product_price = $row['product_price'];
+                        $product_title = $row['product_title'];
+                        $subTotal = $row['product_price'] * $value;
+                        $item_quantity += $value;
+
+                        //insert data into reports table
+                        $insert_report = query("INSERT INTO reports (product_id, order_id, product_title, product_price, product_quantity) 
+                            VALUES ('{$id}', '{$last_id}', '{$product_title}', '{$product_price}', '{$value}')");
+
+                        confirm($insert_report);
+                    }
+                    $total += $subTotal;
+                    $item_quantity;
+                }
+            }
+        }
+        session_destroy();
+    } else {
+        redirect("index.php");
     }
 }

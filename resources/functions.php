@@ -3,6 +3,12 @@
 
 //Helper functions
 
+function last_id()
+{
+    global $connection;
+    return mysqli_insert_id($connection);
+}
+
 function setMessage($msg)
 {
     if (!empty($msg)) {
@@ -187,3 +193,24 @@ function sendMessage()
 }
 
 /******************Back end functions **********/
+
+
+function display_Orders()
+{
+    $query = query("SELECT * FROM orders");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $orders = <<<DELIMETER
+        <tr>
+            <td>{$row['order_id']}</td>
+            <td>&#36;{$row['order_amount']}</td>
+            <td>{$row['order_transaction']}</td>
+            <td>{$row['order_currency']}</td>
+            <td>{$row['order_status']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_order.php?id={$row['order_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        DELIMETER;
+        echo $orders;
+    }
+}
