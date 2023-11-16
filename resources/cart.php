@@ -62,7 +62,9 @@ function cart()
                     $item_quantity += $value;
                     $product = <<<DELIMETER
                     <tr>
-                        <td>{$row['product_title']}</td>
+                        <td>{$row['product_title']}<br>
+                        <img src='../resources/uploads/{$row['product_image']}'></img>
+                        </td>
                         <td>&#36;{$row['product_price']}</td>
                         <td>{$value}</td>
                         <td>&#36;{$subTotal}</td>

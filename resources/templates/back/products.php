@@ -6,8 +6,8 @@
 
             <h1 class="page-header">
                 All Products
-
             </h1>
+            <h4 class="bg-success text-center"> <?php displayMessage(); ?></h4>
             <table class="table table-hover">
 
 
@@ -18,21 +18,12 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Price</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td>20</td>
-                        <td>Nikon 234 <br>
-                            <img src="http://placehold.it/62x62" alt="">
-                        </td>
-                        <td>Category</td>
-                        <td>123</td>
-                    </tr>
-
-
-
+                    <!--  call function to get products data   -->
+                    <?php showProducts(); ?>
                 </tbody>
             </table>
 

@@ -25,7 +25,7 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
             <div class="row">
 
                 <div class="col-md-7">
-                    <img class="img-responsive" src="<?php echo $row['product_image'] ?>" alt="">
+                    <img class="img-responsive" src="../resources/uploads/<?php echo $row['product_image'] ?>" alt="">
 
                 </div>
 
