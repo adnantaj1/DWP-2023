@@ -333,3 +333,36 @@ function updateProduct()
         redirect("index.php?products");
     }
 }
+
+/************* Categories in admin *****************/
+
+function show_categories_admin()
+{
+    $query = query("SELECT * FROM categories");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $categories = <<<DELIMETER
+        <tr>
+            <td>{$row['cat_id']}</td>
+            <td>{$row['cat_title']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['cat_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        DELIMETER;
+        echo $categories;
+    }
+}
+
+function addCategory()
+{
+    if (isset($_POST['add_category'])) {
+        $cat_title = escape_string($_POST['cat_title']);
+        if (empty($cat_title) || $cat_title == " ") {
+            echo "<p class='bg-danger'> This cannot be empty</p>";
+        } else {
+            $query = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}')");
+            $last_id = last_id();
+            confirm($query);
+            setMessage("Category with: {$last_id} is added");
+        }
+    }
+}
