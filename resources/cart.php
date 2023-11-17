@@ -13,7 +13,7 @@ if (isset($_GET['add'])) {
             $_SESSION['product_' . $_GET['add']] += 1;
             redirect("../public/checkout.php");
         } else {
-            setMessage("we only have {$row['product_quantity']} " . $row['product_title'] . " " . "available");
+            setMessage("we only have {$row['product_quantity']} " .  " left!");
             redirect("../public/checkout.php");
         }
     }

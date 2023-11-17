@@ -366,3 +366,76 @@ function addCategory()
         }
     }
 }
+
+
+/*************** Users in admin **************/
+
+function showUsers()
+{
+
+    $query = query("SELECT * FROM users");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $user = <<<DELIMETER
+        <tr>
+            <td>{$row['user_id']}</td>
+            <td>{$row['username']}</td>
+            <td>{$row['email']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td><a class= "btn btn-success" href="../../resources/templates/back/edit_user.php?id={$row['user_id']}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+
+        </tr>
+        DELIMETER;
+        echo $user;
+    }
+}
+
+
+/****************** Add User *****************/
+
+function addUser()
+{
+    if (isset($_POST['add_user'])) {
+        $username = escape_string($_POST['username']);
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+
+        if (
+            (empty($username) || $username == " ") ||
+            (empty($email) || $email == " ") ||
+            (empty($password) || $password == " ")
+        ) {
+            echo "<p class='bg-danger'> This cannot be empty</p>";
+        } else {
+            $query = query("INSERT INTO users (username, email, password) 
+            VALUES ('{$username}','{$email}','{$password}')");
+            confirm($query);
+            redirect("index.php?users");
+            //setMessage("USER CREATED!");
+        }
+    }
+}
+
+/*************** get Reports ******************/
+
+function getReports()
+{
+    $query = query("SELECT * FROM reports");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+
+        $reports = <<<DELIMETER
+        <tr>
+            <td>{$row['report_id']}</td>
+            <td>{$row['product_id']}</td> 
+            <td>{$row['order_id']}</td>
+            <td>{$row['product_title']}</td> 
+            <td>&#36;{$row['product_price']}</td> 
+            <td>{$row['product_quantity']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_report.php?id={$row['report_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td> 
+        </tr>    
+        DELIMETER;
+
+        echo $reports;
+    }
+}
