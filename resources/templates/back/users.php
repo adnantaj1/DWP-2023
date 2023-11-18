@@ -4,10 +4,8 @@
             <h1 class="page-header">
                 Users
             </h1>
-            <p class="bg-success">
-                <!-- <?php echo $message; ?> -->
-            </p>
 
+            <h4 class="bg-success text-center"> <?php displayMessage(); ?></h4>
             <a href="index.php?add_user" class="btn btn-primary">Add User</a>
 
             <div class="col-md-12">

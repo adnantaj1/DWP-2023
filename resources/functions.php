@@ -382,7 +382,7 @@ function showUsers()
             <td>{$row['username']}</td>
             <td>{$row['email']}</td>
             <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
-            <td><a class= "btn btn-success" href="../../resources/templates/back/edit_user.php?id={$row['user_id']}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+            <td><a class= "btn btn-success" href="index.php?edit_user&id={$row['user_id']}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
 
         </tr>
         DELIMETER;
@@ -413,6 +413,26 @@ function addUser()
             redirect("index.php?users");
             //setMessage("USER CREATED!");
         }
+    }
+}
+
+/************ Update User *********************/
+function updateUser()
+{
+    if (isset($_POST['edit_user'])) {
+        $username = escape_string($_POST['username']);
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+
+        $query = "UPDATE users SET ";
+        $query .= "username = '{$username}', ";
+        $query .= "email = '{$email}', ";
+        $query .= "password = '{$password}' ";
+
+        $send_update_query = query($query);
+        confirm($send_update_query);
+        setMessage("User has been updated!");
+        redirect("index.php?users");
     }
 }
 
