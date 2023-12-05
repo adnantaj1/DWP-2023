@@ -5,7 +5,6 @@
         </h1>
         <h4 class="bg-success text-center"> <?php displayMessage(); ?></h4>
     </div>
-
     <div class="row">
         <table class="table table-hover">
             <thead>
@@ -21,8 +20,6 @@
                 <tr>
                     <?php display_Orders(); ?>
                 </tr>
-
-
             </tbody>
         </table>
     </div>

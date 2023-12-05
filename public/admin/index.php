@@ -1,17 +1,11 @@
 <?php require_once("../../resources/config.php");
 include(TEMPLATE_BACK . "/header.php");
-?>
-
-<?php
 if (!isset($_SESSION['username'])) {
     redirect("../../public");
 }
 ?>
 <div id="page-wrapper">
-
     <div class="container-fluid">
-
-
         <?php
         if (
             $_SERVER['REQUEST_URI'] == "/DWP-2023/public/admin/" ||
@@ -46,13 +40,10 @@ if (!isset($_SESSION['username'])) {
         if (isset($_GET['reports'])) {
             include(TEMPLATE_BACK . "/reports.php");
         }
-
         // echo $_SERVER['REQUEST_URI'];
         ?>
-
     </div>
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-
 <?php include(TEMPLATE_BACK . "/footer.php"); ?>

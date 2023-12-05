@@ -1,13 +1,9 @@
 <?php
 require_once("config.php");
-//require_once(TEMPLATE_FRONT . DS . "header.php");
-
-
 if (isset($_GET['add'])) {
     $query = query("SELECT * FROM products WHERE 
     product_id=" . escape_string($_GET['add']) . " ");
     confirm($query);
-
     while ($row = fetch_array($query)) {
         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]) {
             $_SESSION['product_' . $_GET['add']] += 1;
@@ -17,12 +13,7 @@ if (isset($_GET['add'])) {
             redirect("../public/checkout.php");
         }
     }
-
-    // $_SESSION['product_' . $_GET['add']] += 1;
-    // redirect("index.php");
 }
-
-
 if (isset($_GET['remove'])) {
     $_SESSION['product_' . $_GET['remove']]--;
     if ($_SESSION['product_' . $_GET['remove']] < 1) {
@@ -33,14 +24,12 @@ if (isset($_GET['remove'])) {
         redirect("../public/checkout.php");
     }
 }
-
 if (isset($_GET['delete'])) {
     $_SESSION['product_' . $_GET['delete']] = '0';
     unset($_SESSION['item_total']);
     unset($_SESSION['item_quantity']);
     redirect("../public/checkout.php");
 }
-
 function cart()
 {
     $total = 0;
@@ -91,11 +80,9 @@ function cart()
         }
     }
 }
-
 function show_paypal()
 {
     if (isset($_SESSION['item_quantity']) && $_SESSION['item_quantity'] > 0) {
-
         $paypal_button = <<<DELIMETER
         <input type="image" name="upload" 
         src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" 
@@ -112,7 +99,6 @@ function process_transactions()
         $currency = $_GET['cc'];
         $transaction = $_GET['tx'];
         $status = $_GET['st'];
-
         $total = 0;
         $item_quantity = 0;
         foreach ($_SESSION as $name => $value) {

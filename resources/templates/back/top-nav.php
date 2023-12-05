@@ -8,12 +8,10 @@
     <a class="navbar-brand" href="index.php">SB Admin</a>
     <a class="navbar-brand" href="../index.php">Home</a>
 </div>
-
 <ul class="nav navbar-right top-nav">
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['username']; ?> <b class="caret"></b></a>
         <ul class="dropdown-menu">
-
             <li class="divider"></li>
             <li>
                 <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>

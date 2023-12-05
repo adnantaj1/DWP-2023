@@ -1,8 +1,5 @@
 <?php
-
-
 //Helper functions
-
 function last_id()
 {
     global $connection;

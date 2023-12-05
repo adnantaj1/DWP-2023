@@ -22,6 +22,5 @@
         <li>
             <a href="index.php?users"><i class="fa fa-fw fa-wrench"></i>Users</a>
         </li>
-
     </ul>
 </div>

@@ -1,18 +1,12 @@
 <div id="page-wrapper">
-
     <div class="container-fluid">
-
         <div class="row">
-
             <h1 class="page-header">
                 All Products
             </h1>
             <h4 class="bg-success text-center"> <?php displayMessage(); ?></h4>
             <table class="table table-hover">
-
-
                 <thead>
-
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
@@ -26,11 +20,6 @@
                     <?php showProducts(); ?>
                 </tbody>
             </table>
-
         </div>
-
     </div>
-    <!-- /.container-fluid -->
-
 </div>
-<!-- /#page-wrapper -->

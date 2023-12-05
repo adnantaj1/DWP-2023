@@ -1,9 +1,6 @@
 <div id="page-wrapper">
-
     <div class="container-fluid">
-
         <div class="row">
-
             <h1 class="page-header">
                 Reports
             </h1>
@@ -25,11 +22,6 @@
                     <?php getReports(); ?>
                 </tbody>
             </table>
-
         </div>
-
     </div>
-    <!-- /.container-fluid -->
-
 </div>
-<!-- /#page-wrapper -->

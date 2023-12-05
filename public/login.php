@@ -1,13 +1,9 @@
 <?php
 require_once("../resources/config.php");
-
 require_once(TEMPLATE_FRONT . DS . "header.php");
-
 ?>
 
-<!-- Page Content -->
 <div class="container">
-
     <header>
         <h1 class="text-center">Login</h1>
         <h2 class="text-center bg-warning"><?php displayMessage(); ?></h2>
@@ -26,23 +22,10 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
                 </div>
             </form>
         </div>
-
-
     </header>
-
-
 </div>
-
-</div>
-<!-- /.container -->
-
 <div class="container">
-
-
-
-    <!-- Footer -->
     <?php
-
     require_once(TEMPLATE_FRONT . DS . "footer.php");
-
     ?>
+</div>
