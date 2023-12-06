@@ -16,7 +16,6 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
                 <div class="form-group"><label for="password">
                         Password<input type="password" name="password" class="form-control"></label>
                 </div>
-
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-primary">
                 </div>

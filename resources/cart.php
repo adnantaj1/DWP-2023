@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+
 if (isset($_GET['add'])) {
     $query = query("SELECT * FROM products WHERE 
     product_id=" . escape_string($_GET['add']) . " ");

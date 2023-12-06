@@ -1,8 +1,6 @@
 <?php
 require_once("../resources/config.php");
-
 require_once(TEMPLATE_FRONT . DS . "header.php");
-
 ?>
 <!-- Page Content -->
 <div class="container">

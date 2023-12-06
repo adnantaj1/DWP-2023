@@ -1,11 +1,5 @@
-<!-- Configuration-->
-
-<?php require_once("../resources/config.php"); ?>
-
-<!-- Header-->
-<?php require_once(TEMPLATE_FRONT . DS . "header.php"); ?>
-
-<!-- Contact Section -->
+<?php require_once("../resources/config.php");
+require_once(TEMPLATE_FRONT . DS . "header.php");  ?>
 
 <div class="container">
     <div class="row">
@@ -49,7 +43,4 @@
         </div>
     </div>
 </div>
-
-</div>
-<!-- /.container -->
 <?php include(TEMPLATE_FRONT .  "/footer.php"); ?>

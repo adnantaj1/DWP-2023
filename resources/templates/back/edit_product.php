@@ -49,20 +49,20 @@ updateProduct();
             </div>
             <!-- Product Categories-->
             <div class="form-group">
-                <label for="product-title">Product Category</label>
+                <label for="product-category">Product Category</label>
                 <select name="product_category_id" id="" class="form-control">
                     <option value="<?php echo $product_category_id ?>"><?php echo showCategoryTitle_productPage($product_category_id) ?></option>
                     <?php showCategories_atAddProduct(); ?>
                 </select>
             </div>
             <div class="form-group">
-                <label for="product-title">Product Quantity</label>
+                <label for="product-quantity">Product Quantity</label>
                 <input type="number" name="product_quantity" class="form-control" value="<?php echo $product_quantity ?>">
             </div>
             <!-- Product Tags -->
             <!-- Product Image -->
             <div class="form-group">
-                <label for="product-title">Product Image</label>
+                <label for="product-image">Product Image</label>
                 <input type="file" name="file"><br>
                 <img width="200" src="../../resources/uploads/<?php echo $product_image ?>">
             </div>

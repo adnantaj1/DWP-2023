@@ -47,6 +47,8 @@
             <div class="form-group">
                 <label for="product-title">Product Image</label>
                 <input type="file" name="file">
+                <small>Maximum file size: 2MB</small>
+                <small>Recommended image dimensions: 800px x 600px</small>
             </div>
         </aside>
     </form>
