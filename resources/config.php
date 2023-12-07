@@ -19,3 +19,7 @@ $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 require_once("functions.php");
 require_once("cart.php");
+require_once("front-end-Controller");
+require_once("products-Controller");
+require_once("user-Controller");
+require_once("category-Controller");

@@ -1,0 +1,57 @@
+<?php
+
+/************* Categories in admin *****************/
+function show_categories_admin()
+{
+    $query = query("SELECT * FROM categories");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $categories = <<<DELIMETER
+        <tr>
+            <td>{$row['cat_id']}</td>
+            <td>{$row['cat_title']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['cat_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        DELIMETER;
+        echo $categories;
+    }
+}
+
+/****** Add category in admin ********/
+function addCategory()
+{
+    if (isset($_POST['add_category'])) {
+        $cat_title = escape_string($_POST['cat_title']);
+        if (empty($cat_title) || $cat_title == " ") {
+            echo "<p class='bg-danger'> This cannot be empty</p>";
+        } else {
+            $query = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}')");
+            $last_id = last_id();
+            confirm($query);
+            setMessage("Category with: {$last_id} is added");
+        }
+    }
+}
+
+/******** to show category name in product page */
+function showCategoryTitle_productPage($product_category_id)
+{
+    $category_query = query("SELECT * FROM  categories WHERE cat_id = '{$product_category_id}' ");
+    confirm($category_query);
+    while ($category_row = fetch_array($category_query)) {
+        return $category_row['cat_title'];
+    }
+}
+
+/**************TO show categories at add product page */
+function showCategories_atAddProduct()
+{
+    $query = query("SELECT * FROM categories");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $category_options = <<<DELIMETER
+        <option value="{$row['cat_id']}">{$row['cat_title']}</option>
+        DELIMETER;
+        echo $category_options;
+    }
+}

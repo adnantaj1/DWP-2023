@@ -1,0 +1,63 @@
+<?php
+
+/*************** Users in admin **************/
+function showUsers()
+{
+    $query = query("SELECT * FROM users");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $user = <<<USERS
+        <tr>
+            <td>{$row['user_id']}</td>
+            <td>{$row['username']}</td>
+            <td>{$row['email']}</td>
+            <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td><a class= "btn btn-success" href="index.php?edit_user&id={$row['user_id']}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+        </tr>
+        USERS;
+        echo $user;
+    }
+}
+
+/****************** Add User *****************/
+function addUser()
+{
+    if (isset($_POST['add_user'])) {
+        $username = escape_string($_POST['username']);
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+        if (
+            (empty($username) || $username == " ") ||
+            (empty($email) || $email == " ") ||
+            (empty($password) || $password == " ")
+        ) {
+            echo "<p class='bg-danger'> This cannot be empty</p>";
+        } else {
+            $query = query("INSERT INTO users (username, email, password) 
+            VALUES ('{$username}','{$email}','{$password}')");
+            confirm($query);
+            redirect("index.php?users");
+            //setMessage("USER CREATED!");
+        }
+    }
+}
+
+/************ Update User *********************/
+function updateUser()
+{
+    if (isset($_POST['edit_user'])) {
+        $username = escape_string($_POST['username']);
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+
+        $query = "UPDATE users SET ";
+        $query .= "username = '{$username}', ";
+        $query .= "email = '{$email}', ";
+        $query .= "password = '{$password}' ";
+
+        $send_update_query = query($query);
+        confirm($send_update_query);
+        setMessage("User has been updated!");
+        redirect("index.php?users");
+    }
+}
