@@ -7,7 +7,7 @@ function showProducts()
     confirm($query);
     while ($row = fetch_array($query)) {
         $category = showCategoryTitle_productPage($row['product_category_id']);
-        $product = <<<DELIMETER
+        $product = <<<PRODUCTS
             <tr>
                 <td>{$row['product_id']}</td>
                 <td>{$row['product_title']}<br>
@@ -18,8 +18,7 @@ function showProducts()
                 <td>{$row['product_quantity']}</td>
                 <td><a class= "btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['product_id']}" ><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
-        DELIMETER;
-
+        PRODUCTS;
         echo $product;
     }
 }
