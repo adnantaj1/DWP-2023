@@ -28,10 +28,6 @@ updateUser();
                     <input type="email" name="email" class="form-control" value="<?php echo $email ?>">
                 </div>
                 <div class="form-group">
-                    <label for="category-title">Password</label>
-                    <input type="password" name="password" class="form-control" value="<?php echo $password ?>">
-                </div>
-                <div class="form-group">
                     <input type="submit" name="edit_user" class="btn btn-primary" value="Edit User">
                 </div>
             </form>

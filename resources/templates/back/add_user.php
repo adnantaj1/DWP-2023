@@ -9,6 +9,14 @@
         <div class="col-md-4">
             <form action="" method="post">
                 <div class="form-group">
+                    <label for="category-title">First Name</label>
+                    <input type="text" name="firstname" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="category-title">Last NAME</label>
+                    <input type="text" name="lastname" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="category-title">USERNAME</label>
                     <input type="text" name="username" class="form-control">
                 </div>

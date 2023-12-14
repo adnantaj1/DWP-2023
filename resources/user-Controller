@@ -23,46 +23,122 @@ function showUsers()
 function addUser()
 {
     if (isset($_POST['add_user'])) {
+        $firstname = escape_string($_POST['firstname']);
+        $lastname = escape_string($_POST['lastname']);
         $username = escape_string($_POST['username']);
         $email = escape_string($_POST['email']);
         $password = escape_string($_POST['password']);
+
+        // Check if any field is empty
         if (
-            (empty($username) || $username == " ") ||
-            (empty($email) || $email == " ") ||
-            (empty($password) || $password == " ")
+            empty($firstname) || empty($lastname) ||
+            empty($username) || empty($email) || empty($password)
         ) {
-            echo "<p class='bg-danger'> This cannot be empty</p>";
+            echo "<p class='bg-danger'> All fields are required.</p>";
         } else {
-            $query = query("INSERT INTO users (username, email, password) 
-            VALUES ('{$username}','{$email}','{$password}')");
-            confirm($query);
-            redirect("index.php?users");
-            //setMessage("USER CREATED!");
+            // Check if the username already exists
+            $usernameExists = usernameExists($username);
+            if ($usernameExists) {
+                echo "<p class='bg-danger'>Username already exists. Please choose a different username.</p>";
+            } else {
+                // Check if the email is a valid email format
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    echo "<p class='bg-danger'>Invalid email format.</p>";
+                } else {
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    // Continue with user insertion
+                    $query = query("INSERT INTO users (firstname, lastname, username, email, password) 
+                        VALUES ('{$firstname}','{$lastname}','{$username}','{$email}','{$hashedPassword}')");
+                    confirm($query);
+                    redirect("index.php?users");
+                }
+            }
         }
     }
 }
+
 
 /************ Update User *********************/
 function updateUser()
 {
     if (isset($_POST['edit_user'])) {
-        $username = escape_string($_POST['username']);
+        $newUsername = escape_string($_POST['username']);
         $email = escape_string($_POST['email']);
-        $password = escape_string($_POST['password']);
-
-        $query = "UPDATE users SET ";
-        $query .= "username = '{$username}', ";
-        $query .= "email = '{$email}', ";
-        $query .= "password = '{$password}' ";
-
-        $send_update_query = query($query);
-        confirm($send_update_query);
-        setMessage("User has been updated!");
-        redirect("index.php?users");
+        // Check if the new username and email are not empty
+        if (empty($newUsername) || empty($email)) {
+            setMessage("Username and email cannot be empty.");
+            redirect("index.php?users");
+            return; // Exit the function to prevent further processing
+        }
+        // Check if the email is a valid email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            setMessage("Invalid email format.");
+            redirect("index.php?users");
+            return; // Exit the function to prevent further processing
+        }
+        // Check if the new username already exists
+        $usernameExists = usernameExists($newUsername);
+        if ($usernameExists) {
+            setMessage("The new username already exists. Please choose a different username.");
+            redirect("index.php?users");
+        } else {
+            // Continue with the update
+            $query = "UPDATE users SET ";
+            $query .= "username = '{$newUsername}', ";
+            $query .= "email = '{$email}' ";
+            $query .= "WHERE user_id = " . escape_string($_GET['id']); // Assuming you're updating a specific user
+            $send_update_query = query($query);
+            confirm($send_update_query);
+            setMessage("User has been updated!");
+            redirect("index.php?users");
+        }
     }
 }
 
 /**************** To login user ***************/
+function login_user()
+{
+    if (isset($_POST['submit'])) {
+        $username = escape_string($_POST['username']);
+        $password = escape_string($_POST['password']);
+        // Retrieve the hashed password from the database based on the entered username
+        $query = query("SELECT password FROM users WHERE username = '{$username}'");
+        confirm($query);
+        if (mysqli_num_rows($query) == 1) {
+            $row = fetch_array($query);
+            $storedHashedPassword = $row['password'];
+            // Use password_verify to check if the entered password matches the stored hash
+            if (password_verify($password, $storedHashedPassword)) {
+                // Passwords match, proceed with login
+                $_SESSION['username'] = $username;
+                // setMessage("Welcome to admin {$username}");
+                redirect("admin");
+            } else {
+                // Passwords do not match
+                setMessage("Wrong Username or Password");
+                redirect("login.php");
+            }
+        } else {
+            // User not found
+            setMessage("Wrong Username or Password");
+            redirect("login.php");
+        }
+    }
+}
+
+// Function to check if the username already exists
+function usernameExists($username)
+{
+    $query = query("SELECT * FROM users WHERE username = '{$username}'");
+    confirm($query);
+
+    return mysqli_num_rows($query) > 0;
+}
+
+
+/******* LOGIN USER WITHOUT HASHING *****
+ * 
+ *
 function login_user()
 {
     if (isset($_POST['submit'])) {
@@ -84,3 +160,4 @@ function login_user()
         }
     }
 }
+ */
