@@ -1,0 +1,78 @@
+<?php
+
+function getSlides()
+{
+    $qurey = query("SELECT * From slides");
+    confirm($qurey);
+    while ($row = fetch_array($qurey)) {
+        $slides = <<<SLIDES
+    <div class="item">
+        <img style="height: 600px" width='700' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
+    </div>
+    SLIDES;
+        echo $slides;
+    }
+}
+
+function getActiveSlide()
+{
+    $qurey = query("SELECT * From slides ORDER BY slide_id DESC LIMIT 1");
+    confirm($qurey);
+    while ($row = fetch_array($qurey)) {
+        $slides_active = <<<SLIDES
+    <div class="item active">
+        <img style="height: 600px" width='700' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
+    </div>
+    SLIDES;
+        echo $slides_active;
+    }
+}
+
+function addSlide()
+{
+    if (isset($_POST['add_slide'])) {
+        $slide_title     = escape_string($_POST['slide_title']);
+        $slide_image     = escape_string($_FILES['file']['name']);
+        $slide_image_loc = escape_string($_FILES['file']['tmp_name']);
+
+        if (empty($slide_title || empty($slide_image))) {
+            echo  "<p class='bg-danger'> This Field Cannot be Empty</p>";
+        } else {
+            move_uploaded_file($slide_image_loc, UPLOAD_DIRECTORY . DS . $slide_image);
+            $qurey = query("INSERT INTO slides(slide_title, slide_image)
+             VALUES ('{$slide_title}','{$slide_image}')");
+            confirm($qurey);
+            setMessage("Slide Added");
+            redirect("index.php?slides");
+        }
+    }
+}
+
+function getCurrentSlideInAdmin()
+{
+    $qurey = query("SELECT * From slides ORDER BY slide_id DESC LIMIT 1");
+    confirm($qurey);
+    while ($row = fetch_array($qurey)) {
+        $slides_active_admin = <<<SLIDES
+        <img style="height: 600px" width='700' class="img-responsive" src="../../resources/uploads/{$row['slide_image']}" alt="">
+    SLIDES;
+        echo $slides_active_admin;
+    }
+}
+
+function getSlideThumbnails()
+{
+    $qurey = query("SELECT * From slides ORDER BY slide_id ASC ");
+    confirm($qurey);
+    while ($row = fetch_array($qurey)) {
+        $slides_thumb = <<<SLIDES
+        <div class="col-xs-6 col-md-3 image_container">
+        <a href="../../resources/templates/back/delete_slide.php?id={$row['slide_id']}">
+            <img width='200' class="img-responsive" src="../../resources/uploads/{$row['slide_image']}" alt="">
+        </a>
+        <div class="caption"> <p>{$row['slide_title']}</p></div>
+        </div>   
+    SLIDES;
+        echo $slides_thumb;
+    }
+}

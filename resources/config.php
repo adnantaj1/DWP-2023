@@ -23,3 +23,4 @@ require_once("front-end-Controller");
 require_once("products-Controller");
 require_once("user-Controller");
 require_once("category-Controller");
+require_once("slider-Controller");

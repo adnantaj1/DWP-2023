@@ -11,7 +11,7 @@ function showProducts()
             <tr>
                 <td>{$row['product_id']}</td>
                 <td>{$row['product_title']}<br>
-                    <a href="index.php?edit_product&id={$row['product_id']}"> <img src="../../resources/uploads/{$row['product_image']}"></a>
+                    <a href="index.php?edit_product&id={$row['product_id']}"> <img style="height: 90px; width: 100px;" src="../../resources/uploads/{$row['product_image']}"></a>
                 </td>
                 <td>{$category}</td>
                 <td>&#36;{$row['product_price']}</td>
