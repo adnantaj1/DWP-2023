@@ -25,5 +25,8 @@
         <li>
             <a href="index.php?slides"><i class="fa fa-fw fa-wrench"></i>Slides</a>
         </li>
+        <li>
+            <a href="index.php?about"><i class="fa fa-fw fa-wrench"></i>About</a>
+        </li>
     </ul>
 </div>

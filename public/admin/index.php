@@ -43,6 +43,9 @@ if (!isset($_SESSION['username'])) {
         if (isset($_GET['slides'])) {
             include(TEMPLATE_BACK . "/slides.php");
         }
+        if (isset($_GET['about'])) {
+            include(TEMPLATE_BACK . "/about.php");
+        }
         // echo $_SERVER['REQUEST_URI'];
         ?>
     </div>

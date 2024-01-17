@@ -21,5 +21,5 @@ require_once(TEMPLATE_FRONT . DS . "header.php");
     </div>
 </div>
 <?php
-require_once(TEMPLATE_FRONT . DS . "footer.php")
+require_once(TEMPLATE_FRONT . DS . "main_footer.php")
 ?>

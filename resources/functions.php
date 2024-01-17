@@ -119,3 +119,65 @@ function getReports()
         echo $reports;
     }
 }
+
+function fetchFooterInfo()
+{
+
+
+    $query = query("SELECT * FROM footer_info LIMIT 1");
+    confirm($query);
+    $result = fetch_array($query);
+
+    if (!$result) {
+        die("Query failed: ");
+    }
+
+    $row = $result;
+
+    return $row;
+}
+
+function updateAboutInfo($street, $city, $state, $zipcode, $phone, $email, $monFriOpening, $monFriClosing, $satOpening, $satClosing)
+{
+    // Check if any of the input fields are empty
+    if (empty($street) || empty($city) || empty($state) || empty($zipcode) || empty($phone) || empty($email) || empty($monFriOpening) || empty($monFriClosing) || empty($satOpening) || empty($satClosing)) {
+        setMessage("All fields must be filled in.");
+        redirect("index.php?about"); // Redirect to the appropriate page
+        return;
+    }
+
+    // Check if the email is a valid email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        setMessage("Invalid email format.");
+        redirect("index.php"); // Redirect to the appropriate page
+        return;
+    }
+
+    // Create the SQL query to update the about_info table
+    $query = "UPDATE about_info SET ";
+    $query .= "street = '" . escape_string($street) . "', ";
+    $query .= "city = '" . escape_string($city) . "', ";
+    $query .= "state = '" . escape_string($state) . "', ";
+    $query .= "zipcode = '" . escape_string($zipcode) . "', ";
+    $query .= "phone = '" . escape_string($phone) . "', ";
+    $query .= "email = '" . escape_string($email) . "', ";
+    $query .= "mon_fri_opening = '" . escape_string($monFriOpening) . "', ";
+    $query .= "mon_fri_closing = '" . escape_string($monFriClosing) . "', ";
+    $query .= "sat_opening = '" . escape_string($satOpening) . "', ";
+    $query .= "sat_closing = '" . escape_string($satClosing) . "' ";
+
+    // You might want to add a WHERE clause to specify which row to update
+    // For example: $query .= "WHERE id = 1";
+
+    // Perform the query
+    $update_query = query($query);
+
+    // Check if the query was successful
+    if ($update_query) {
+        setMessage("About information has been updated!");
+        redirect("index.php?about"); // Redirect to the appropriate page
+    } else {
+        setMessage("Failed to update about information.");
+        redirect("index.php?about"); // Redirect to the appropriate page
+    }
+}
