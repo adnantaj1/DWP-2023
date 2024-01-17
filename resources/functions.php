@@ -147,14 +147,12 @@ function updateAboutInfo($street, $city, $state, $zipcode, $phone, $email, $monF
         redirect("index.php?about"); // Redirect to the appropriate page
         return;
     }
-
     // Check if the email is a valid email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         setMessage("Invalid email format.");
         redirect("index.php"); // Redirect to the appropriate page
         return;
     }
-
     // Create the SQL query to update the about_info table
     $query = "UPDATE about_info SET ";
     $query .= "street = '" . escape_string($street) . "', ";
@@ -167,13 +165,7 @@ function updateAboutInfo($street, $city, $state, $zipcode, $phone, $email, $monF
     $query .= "mon_fri_closing = '" . escape_string($monFriClosing) . "', ";
     $query .= "sat_opening = '" . escape_string($satOpening) . "', ";
     $query .= "sat_closing = '" . escape_string($satClosing) . "' ";
-
-    // You might want to add a WHERE clause to specify which row to update
-    // For example: $query .= "WHERE id = 1";
-
-    // Perform the query
     $update_query = query($query);
-
     // Check if the query was successful
     if ($update_query) {
         setMessage("About information has been updated!");
@@ -198,8 +190,7 @@ function updateAbout()
         <div class="col-lg-4">
             <h4>Opening Hours</h4>
             <p>Monday - Friday: {$row['mon_fri_opening']} - {$row['mon_fri_closing']}<br>Saturday: {$row['sat_opening']} - {$row['sat_closing']}<br>Sunday: Closed</p>
-        </div>
-          
+        </div>     
     ABOUT;
     echo $about;
 }
