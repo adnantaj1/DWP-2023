@@ -2,14 +2,7 @@
     <hr>
     <footer>
         <div class="row">
-            <div class="col-lg-4">
-                <h4>Contact Information</h4>
-                <p>123 Main Street<br>City, State ZIP Code<br>Phone: (123) 456-7890<br>Email: info@example.com</p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Opening Hours</h4>
-                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
-            </div>
+            <?php updateAbout(); ?>
             <div class="col-lg-4">
                 <h4>Follow Us</h4>
                 <p>Stay connected on social media:</p>
@@ -22,8 +15,10 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <p>&copy; Your Website 2030</p>
             </div>
         </div>
     </footer>
 </div>
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>

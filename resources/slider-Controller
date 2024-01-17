@@ -7,7 +7,7 @@ function getSlides()
     while ($row = fetch_array($qurey)) {
         $slides = <<<SLIDES
     <div class="item">
-        <img style="height: 600px" width='700' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
+        <img style="height: 450px" width='500' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
     </div>
     SLIDES;
         echo $slides;
@@ -21,7 +21,7 @@ function getActiveSlide()
     while ($row = fetch_array($qurey)) {
         $slides_active = <<<SLIDES
     <div class="item active">
-        <img style="height: 600px" width='700' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
+        <img style="height: 450px" width='500' class="slide-image" src="../resources/uploads/{$row['slide_image']}" alt="">
     </div>
     SLIDES;
         echo $slides_active;

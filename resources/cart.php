@@ -31,6 +31,8 @@ if (isset($_GET['delete'])) {
     unset($_SESSION['item_quantity']);
     redirect("../public/checkout.php");
 }
+
+// CART FUNCTION
 function cart()
 {
     $total = 0;
@@ -39,6 +41,10 @@ function cart()
     $item_number = 1;
     $amount = 1;
     $quantity = 1;
+
+    // Initialize $subTotal outside of the loop
+    $subTotal = 0;
+
     foreach ($_SESSION as $name => $value) {
         if ($value > 0) {
             if (substr($name, 0, 8) == "product_") {
@@ -50,10 +56,10 @@ function cart()
                 while ($row = fetch_array($query)) {
                     $subTotal = $row['product_price'] * $value;
                     $item_quantity += $value;
-                    $product = <<<DELIMETER
+                    $product = <<<DELIMITER
                     <tr>
                         <td>{$row['product_title']}<br>
-                        <img src='../resources/uploads/{$row['product_image']}'></img>
+                        <img style="height: 90px; width: 100px;" src='../resources/uploads/{$row['product_image']}'></img>
                         </td>
                         <td>&#36;{$row['product_price']}</td>
                         <td>{$value}</td>
@@ -68,7 +74,7 @@ function cart()
                     <input type="hidden" name="item_number_{$item_number}" value="{$row['product_id']}"> 
                     <input type="hidden" name="amount_{$amount}" value="{$row['product_price']}">
                     <input type="hidden" name="quantity_{$quantity}" value="{$value}">
-                    DELIMETER;
+                    DELIMITER;
                     echo $product;
                     $item_name++;
                     $item_number++;
@@ -81,6 +87,7 @@ function cart()
         }
     }
 }
+
 function show_paypal()
 {
     if (isset($_SESSION['item_quantity']) && $_SESSION['item_quantity'] > 0) {

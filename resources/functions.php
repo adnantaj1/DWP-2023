@@ -137,6 +137,8 @@ function fetchFooterInfo()
     return $row;
 }
 
+
+/*************** about Controller ******************/
 function updateAboutInfo($street, $city, $state, $zipcode, $phone, $email, $monFriOpening, $monFriClosing, $satOpening, $satClosing)
 {
     // Check if any of the input fields are empty
@@ -180,4 +182,24 @@ function updateAboutInfo($street, $city, $state, $zipcode, $phone, $email, $monF
         setMessage("Failed to update about information.");
         redirect("index.php?about"); // Redirect to the appropriate page
     }
+}
+
+function updateAbout()
+{
+    $query = query("SELECT * FROM about_info LIMIT 1");
+    confirm($query);
+    $row = fetch_array($query);
+
+    $about = <<<ABOUT
+        <div class="col-lg-4">
+            <h4>Contact Information</h4>
+            <p>{$row['street']}<br>{$row['city']}, {$row['state']} {$row['zipcode']}<br>Phone:{$row['phone']}<br>Email: {$row['email']}</p> 
+        </div>
+        <div class="col-lg-4">
+            <h4>Opening Hours</h4>
+            <p>Monday - Friday: {$row['mon_fri_opening']} - {$row['mon_fri_closing']}<br>Saturday: {$row['sat_opening']} - {$row['sat_closing']}<br>Sunday: Closed</p>
+        </div>
+          
+    ABOUT;
+    echo $about;
 }
