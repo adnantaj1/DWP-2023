@@ -141,3 +141,24 @@ INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `username`, `email`, `p
 
 -- To Delete User
 DELETE FROM `users` WHERE `user_id` = [id];
+
+-- Example of view
+
+CREATE VIEW ProductSummary AS
+SELECT product_id, product_title, product_price, product_image
+FROM products;
+
+SELECT * FROM ProductSummary;
+
+-- Example of Trigger
+
+CREATE TRIGGER CheckQuantityBeforeInsert
+BEFORE INSERT ON products
+FOR EACH ROW
+BEGIN
+    IF NEW.product_quantity > 100 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error: Product quantity cannot exceed 100';
+    END IF;
+END;
+
